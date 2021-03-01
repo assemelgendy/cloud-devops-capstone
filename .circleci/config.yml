@@ -49,3 +49,12 @@ jobs:
               docker build -t assemelgendy/$IMAGE_NAME:$TAG .
               docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD 
               docker push assemelgendy/$IMAGE_NAME:$TAG
+
+workflows:
+  default:
+    jobs:
+      - run-lint
+      - build-docker-image
+      - push-docker-image:
+          requires:
+            - "build-docker-image"
