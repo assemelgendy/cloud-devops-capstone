@@ -20,11 +20,7 @@ jobs:
   #     - run:
   #         name: run lint
   #         command: hadolint Dockerfile
-  run-lint:
-      executor: docker/hadolint
-      dockerfiles: ./Dockerfile
-      ignore-rules: 'DL4005,DL3008'
-      
+
   build-docker-image:
     docker:
         - image: circleci/node:13.8.0
@@ -58,7 +54,9 @@ jobs:
 workflows:
   default:
     jobs:
-      - run-lint
+      - docker/hadolint:
+          dockerfiles: Dockerfile
+          ignore-rules: 'DL4005,DL3008'
       - build-docker-image:
           requires:
             - "run-lint"
