@@ -164,7 +164,8 @@ workflows:
       - deploy-application:
           cluster-name: eks-orb-capstone-project-deployment-${CIRCLE_WORKFLOW_ID:0:7}
           aws-region: $AWS_DEFAULT_REGION
-          docker-image-name: "${AWS_ECR_URL}/eks_orb_capstone_project"
+          # docker-image-name: "${AWS_ECR_URL}/eks_orb_capstone_project"
+          docker-image-name: assemelgendy/capstone
           version-info: "${CIRCLE_SHA1}"
           requires:
             - aws-eks/create-cluster
