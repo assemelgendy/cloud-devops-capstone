@@ -82,7 +82,9 @@ jobs:
             resource-file-path: "deployments/deployment.yml"
             get-rollout-status: true
             resource-name: deployment/deployments
-        - no_output_timeout: 60m
+            no_output_timeout: 30m
+        
+
         # - kubernetes/create-or-update-resource:
         #     resource-file-path: "deployments/deployment.yml"
 
