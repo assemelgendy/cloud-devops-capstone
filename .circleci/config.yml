@@ -71,12 +71,7 @@ jobs:
             AWS region
           type: string
           default: "us-west-2"
-        watch-timeout:
-          default: ""
-          description: |
-              The length of time to wait before ending the watch, zero means never.
-              Any other values should contain a corresponding time unit (e.g. 1s, 2m, 3h).
-          type: string
+        
     steps:
         - checkout
         - aws-eks/update-kubeconfig-with-authenticator:
@@ -86,9 +81,9 @@ jobs:
         - kubernetes/create-or-update-resource:
             resource-file-path: "deployments/deployment.yml"
             get-rollout-status: true
-            resource-name: deployment/capstone
-        - kubernetes/create-or-update-resource:
-            resource-file-path: "deployments/deployment.yml"
+            resource-name: capstone
+        # - kubernetes/create-or-update-resource:
+        #     resource-file-path: "deployments/deployment.yml"
 
   test-application:
     executor: aws-eks/python3
@@ -173,7 +168,6 @@ workflows:
           # docker-image-name: "${AWS_ECR_URL}/eks_orb_capstone_project"
           docker-image-name: assemelgendy/capstone
           version-info: "${CIRCLE_SHA1}"
-          watch-timeout: 15m
           requires:
             - aws-eks/create-cluster
       - test-application:
@@ -193,4 +187,3 @@ workflows:
           wait: true
           requires:
             - undeploy-application
-#test deploy
