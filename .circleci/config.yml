@@ -81,7 +81,7 @@ jobs:
         - kubernetes/create-or-update-resource:
             resource-file-path: "deployments/deployment.yml"
             get-rollout-status: true
-            resource-name: deployment/deployments
+            resource-name: deployment
         
 
         # - kubernetes/create-or-update-resource:
