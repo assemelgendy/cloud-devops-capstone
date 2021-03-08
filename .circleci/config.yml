@@ -80,7 +80,7 @@ jobs:
             aws-region: << parameters.aws-region >>
         - kubernetes/create-or-update-resource:
             resource-file-path: "deployments/deployment.yml"
-            get-rollout-status: true
+            # get-rollout-status: true
             resource-name: deployment
         
 
@@ -164,14 +164,14 @@ workflows:
           aws-region: $AWS_DEFAULT_REGION
           requires:
             - build-and-push-image-ecr
-      # - deploy-application:
-      #     cluster-name: eks-orb-capstone-project-deployment-${CIRCLE_WORKFLOW_ID:0:7}
-      #     aws-region: $AWS_DEFAULT_REGION
-      #     # docker-image-name: "${AWS_ECR_URL}/eks_orb_capstone_project"
-      #     docker-image-name: assemelgendy/capstone
-      #     version-info: "${CIRCLE_SHA1}"
-      #     requires:
-      #       - aws-eks/create-cluster
+      - deploy-application:
+          cluster-name: eks-orb-capstone-project-deployment-${CIRCLE_WORKFLOW_ID:0:7}
+          aws-region: $AWS_DEFAULT_REGION
+          # docker-image-name: "${AWS_ECR_URL}/eks_orb_capstone_project"
+          docker-image-name: assemelgendy/capstone
+          version-info: "${CIRCLE_SHA1}"
+          requires:
+            - aws-eks/create-cluster
       # - test-application:
       #     cluster-name: eks-orb-capstone-project-deployment-${CIRCLE_WORKFLOW_ID:0:7}
       #     aws-region: $AWS_DEFAULT_REGION
